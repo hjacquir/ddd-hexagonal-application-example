@@ -15,7 +15,11 @@
         "symfony/flex": "^1.3.1",
         "symfony/framework-bundle": "4.4.*",
         "symfony/proxy-manager-bridge": "4.4.*",
-        "symfony/yaml": "4.4.*"
+        "symfony/yaml": "4.4.*",
+        "halaxa/json-machine": "^0.7.0",
+        "guzzlehttp/guzzle": "^7.3",
+        "matomo/decompress": "^2.1",
+        "monolog/monolog": "^2.2"
     },
     "config": {
         "preferred-install": {

@@ -8,19 +8,29 @@ use App\Domain\Enum\EventType;
 use App\Domain\Model\GithubEventType;
 use App\Infrastructure\Doctrine\DoctrineGithubEventTypeRepository;
 use App\Infrastructure\InfrastructureException;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\ORM\EntityManagerInterface;
 use Monolog\Logger;
-use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @covers \App\Infrastructure\Doctrine\DoctrineGithubEventTypeRepository
  */
-class DoctrineGithubEventTypeRepositoryTest extends TestCase
+class DoctrineGithubEventTypeRepositoryTest extends KernelTestCase
 {
+    private ?EntityManagerInterface $entityManager;
+
     private DoctrineGithubEventTypeRepository $currentTested;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
-        $this->currentTested = new DoctrineGithubEventTypeRepository(new Logger('test'));
+        $kernel = self::bootKernel();
+
+        $this->entityManager = $kernel->getContainer()
+            ->get('doctrine')
+            ->getManager();
+
+        $this->currentTested = new DoctrineGithubEventTypeRepository(new Logger('test'), $this->entityManager);
     }
 
     public function testSaveEventTypeWhenNoErrorOccurred()
@@ -31,10 +41,8 @@ class DoctrineGithubEventTypeRepositoryTest extends TestCase
             )
         );
 
-        $em = $this->currentTested->getEntityManager();
-
         /** @var GithubEventType $type */
-        $type = $em->find(GithubEventType::class, 1);
+        $type = $this->entityManager->find(GithubEventType::class, 1);
 
         $this->assertSame(EventType::PULLREQUESTREVIEWCOMMENTEVENT, $type->getLabel());
 
@@ -56,5 +64,16 @@ class DoctrineGithubEventTypeRepositoryTest extends TestCase
                 EventType::get(EventType::PULLREQUESTREVIEWCOMMENTEVENT)
             )
         );
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $purger = new ORMPurger($this->entityManager);
+        $purger->purge();
+
+        $this->entityManager->close();
+        $this->entityManager = null;
     }
 }

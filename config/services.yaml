@@ -24,3 +24,8 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    guzzle:
+        class : GuzzleHttp\Client
+    App\Application\Command\DownloadGithubArchive :
+        arguments:
+            $client: '@guzzle'

@@ -100,11 +100,11 @@ unit-test                      Run PhpUnit unit testsuite
 func-test                      Run PhpUnit functionnal testsuite
 ```
 
-### Usage
+## Usage
 
-## Download Github archive remote file
+### Download Github archive remote file
 
 * Define in your .env configuration file the path to the directory that will store the downloaded archive files :
-`LOCAL_DOWNLOADED_FILE_PATH`
+  `LOCAL_DOWNLOADED_FILE_PATH`
 * Enter in your shell and launch the command : `bin/console app:download 2014-02-01` with the date to fetch (e.g : 2012-02-02 here)
-to verbose all log message add the options : `-vvv` like `bin/console app:download 2014-02-01 -vvv`
+  to verbose all log message add the options : `-vvv` like `bin/console app:download 2014-02-01 -vvv`

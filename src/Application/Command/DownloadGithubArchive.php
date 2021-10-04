@@ -6,12 +6,14 @@ namespace App\Application\Command;
 
 use App\Application\Downloader;
 use App\Domain\RemoteFileList;
+use App\Infrastructure\Messenger\Message\DownloadedFile;
 use GuzzleHttp\ClientInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class DownloadGithubArchive extends Command
 {
@@ -21,13 +23,21 @@ class DownloadGithubArchive extends Command
     protected static $defaultName = 'app:download';
     private LoggerInterface $logger;
     private ClientInterface $client;
+    private MessageBusInterface $bus;
+    private string $localDownloadFilePath;
 
-    public function __construct(LoggerInterface $logger, ClientInterface $client)
-    {
+    public function __construct(
+        LoggerInterface $logger,
+        ClientInterface $client,
+        MessageBusInterface $bus,
+        string $localDownloadFilePath
+    ) {
         parent::__construct();
 
+        $this->localDownloadFilePath = $localDownloadFilePath;
         $this->logger = $logger;
         $this->client = $client;
+        $this->bus = $bus;
     }
 
     protected function configure()
@@ -44,17 +54,17 @@ class DownloadGithubArchive extends Command
     {
         /** @var string $date */
         $date = $input->getArgument(self::COMMAND_ARGUMENT_DATE);
-        $localDownloadedFilePath = $_ENV['LOCAL_DOWNLOADED_FILE_PATH'];
 
         try {
             $downloader = new Downloader(
                 $this->client,
                 new RemoteFileList(new \DateTimeImmutable($date)),
-                $localDownloadedFilePath
+                $this->localDownloadFilePath
             );
 
             foreach ($downloader->downloadRemoteFiles() as $downloadRemoteFile) {
               $this->logger->info($downloadRemoteFile . ' -> Downloaded successfully');
+              $this->bus->dispatch(new DownloadedFile($downloadRemoteFile));
             }
 
             return self::COMMAND_FINISHED_WITH_SUCCESS;

@@ -100,6 +100,10 @@ unit-test                      Run PhpUnit unit testsuite
 func-test                      Run PhpUnit functionnal testsuite
 ```
 
+### Code style
+
+The project follows the PSR12 standard.
+
 ## Usage
 
 ### Download Github archive remote file
@@ -108,3 +112,9 @@ func-test                      Run PhpUnit functionnal testsuite
   `LOCAL_DOWNLOADED_FILE_PATH`
 * Enter in your shell and launch the command : `bin/console app:download 2014-02-01` with the date to fetch (e.g : 2012-02-02 here)
   to verbose all log message add the options : `-vvv` like `bin/console app:download 2014-02-01 -vvv`
+* The files are downloaded into the local folder and a message was sent to rabbitmq with the filename
+
+### Extract downloaded file
+
+* The files are extracted by consuming amqp message : `bin/console messenger:consume`
+* The files are extracted in the same folder

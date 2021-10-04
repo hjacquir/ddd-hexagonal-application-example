@@ -29,3 +29,4 @@ services:
     App\Application\Command\DownloadGithubArchive :
         arguments:
             $client: '@guzzle'
+            $localDownloadFilePath: '%env(LOCAL_DOWNLOADED_FILE_PATH)%'

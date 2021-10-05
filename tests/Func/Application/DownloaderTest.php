@@ -38,7 +38,7 @@ class DownloaderTest extends TestCase
 
     public function testDownloadRemoteFilesThrownExceptionWhenRemoteDownloadFail()
     {
-        $localDownloadedFilesPath = __DIR__ . '/bar';
+        $localDownloadedFilesPath = __DIR__ . '/for_downloader';
 
         // create a client that emulate an failure response
         $client = new Client([
@@ -65,7 +65,7 @@ class DownloaderTest extends TestCase
 
     public function testDownloadRemoteFiles()
     {
-        $localDownloadedFilesPath = __DIR__ . '/bar/';
+        $localDownloadedFilesPath = __DIR__ . '/for_downloader/';
 
         $client = new Client([
                 'handler' => HandlerStack::create(new MockHandler(
@@ -85,5 +85,7 @@ class DownloaderTest extends TestCase
 
         $downloaded = $downloader->downloadRemoteFiles()->current();
         $this->assertStringContainsString('.json.gz', $downloaded);
+        // after the test we remove the downloaded file
+        unlink($downloaded);
     }
 }

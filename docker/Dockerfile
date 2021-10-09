@@ -43,6 +43,17 @@ RUN apk add --no-cache --no-progress --virtual .build_deps_php_amqp rabbitmq-c-d
 # Copy configuration
 COPY config/amqp.ini /usr/local/etc/php/conf.d/
 
+# Install Xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_handler=dbgp" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.idekey=idekey" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_host=127.0.0.1:8000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
 USER docker:docker
 
 EXPOSE 8000

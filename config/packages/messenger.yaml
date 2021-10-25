@@ -1,14 +1,18 @@
 framework:
     messenger:
         # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
-        # failure_transport: failed
+        failure_transport: failed
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
-            async: '%env(MESSENGER_TRANSPORT_DSN)%'
-            # failed: 'doctrine://default?queue_name=failed'
+            downloaded: '%env(MESSENGER_TRANSPORT_DSN_DOWNLOADED)%'
+            extracted: '%env(MESSENGER_TRANSPORT_DSN_EXTRACTED)%'
+            mapped: '%env(MESSENGER_TRANSPORT_DSN_MAPPED)%'
+            failed: '%env(MESSENGER_TRANSPORT_DSN_FAILURE)%'
             # sync: 'sync://'
 
         routing:
             # Route your messages to the transports
-             'App\Infrastructure\Messenger\Message\DownloadedFile': async
+             'App\Infrastructure\Messenger\Message\DownloadedFile': downloaded
+             'App\Infrastructure\Messenger\Message\ExtractedFile': extracted
+             'App\Domain\Mapper\Mapped': mapped

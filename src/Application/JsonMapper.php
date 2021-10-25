@@ -4,42 +4,41 @@ declare(strict_types=1);
 
 namespace App\Application;
 
-use App\Application\Exception\JsonParsingException;
 use App\Domain\FieldForExtractionList;
 use App\Domain\Fields\Field;
 use App\Domain\Mapper\Mapped;
 use App\Domain\Mapper\Mapper;
 use JsonMachine\JsonMachine;
+use Psr\Log\LoggerInterface;
 
 class JsonMapper implements Mapper
 {
     private FieldForExtractionList $fieldForExtractionList;
 
-    /**
-     * @param FieldForExtractionList $fieldForExtractionList
-     */
-    public function __construct(FieldForExtractionList $fieldForExtractionList)
+    private LoggerInterface $logger;
+
+    public function __construct(FieldForExtractionList $fieldForExtractionList, LoggerInterface $logger)
     {
         $this->fieldForExtractionList = $fieldForExtractionList;
+        $this->logger = $logger;
     }
 
-    /**
-     * @throws JsonParsingException
-     */
     public function map(string $string): Mapped
     {
         $mapped = new Mapped();
 
         foreach ($this->fieldForExtractionList->getList() as $field) {
             $mapped = $this->buildMapped($string, $field, $mapped);
+
+            // if map is invalid do not iterate to all field -> stop process
+            if (false === $mapped->isValid()) {
+                return $mapped;
+            }
         }
 
         return $mapped;
     }
 
-    /**
-     * @throws JsonParsingException
-     */
     private function buildMapped(string $string, Field $field, Mapped $mapped): Mapped
     {
         try {
@@ -55,10 +54,15 @@ class JsonMapper implements Mapper
                 // current value in the Mapped
                 $mapped->addValue($field->getName(), $value);
             }
-            // we catch the json machine exception when
-            // extraction fails
         } catch (\Throwable $exception) {
-            throw new JsonParsingException($exception->getMessage());
+            $this->logger->error(
+                'An error occurred when trying to map the json string.',
+                [
+                    'error message' => $exception->getMessage(),
+                ]
+            );
+
+            $mapped->setIsValid(false);
         }
 
         return $mapped;

@@ -9,9 +9,7 @@ use App\Domain\Enum\EventType;
 class GithubEventType implements Model
 {
     private int $id;
-
     private string $label;
-
     private EventType $enumEventType;
 
     public function __construct(EventType $enumEventType)

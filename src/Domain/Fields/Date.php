@@ -4,22 +4,20 @@ declare(strict_types=1);
 
 namespace App\Domain\Fields;
 
-use App\Domain\Enum\EventType;
-
-class Type implements Field
+class Date implements Field
 {
     public function getPattern(): string
     {
-        return '/type';
+        return '/created_at';
     }
 
     public function getName(): string
     {
-        return 'type';
+        return 'date';
     }
 
     public function isValidForExtraction(string $currentValue): bool
     {
-        return true === in_array($currentValue, EventType::values());
+        return true;
     }
 }

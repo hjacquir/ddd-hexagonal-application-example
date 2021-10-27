@@ -1,11 +1,13 @@
 <?php
 
-namespace Tests\Functional\Application;
+namespace App\Tests\Func\Application;
 
 use App\Application\JsonMapper;
 use App\Application\Exception\JsonParsingException;
 use App\Domain\FieldForExtractionList;
+use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 /**
  * @covers \App\Application\JsonMapper
@@ -16,20 +18,25 @@ class JsonMapperTest extends TestCase
 
     public function setUp(): void
     {
-        $this->currentTested = new JsonMapper(new FieldForExtractionList());
+        $this->currentTested = new JsonMapper(new FieldForExtractionList(), new Logger('test'));
     }
 
     public function testMapReturnAnMappedValidWhenAllFieldAreFound()
     {
         $line = '{
 "type": "CommitCommentEvent",
+"repo": {
+    "name": "bla"
+ },
 "payload": {
     "comment": 
       {
         "body": "edited",
         "test": "bla"
       }
-  }
+  },
+  "id": "1234",
+  "created_at": "2011-04-14T16:00:49Z"
 }';
         $mapped = $this->currentTested->map($line);
 
@@ -37,14 +44,17 @@ class JsonMapperTest extends TestCase
             [
                 'type' => 'CommitCommentEvent',
                 'body' => 'edited',
+                'repo' => 'bla',
+                'uuid' => '1234',
+                'date' => '2011-04-14T16:00:49Z',
             ],
-            iterator_to_array($mapped->getValues())
+            $mapped->getValues()
         );
 
         $this->assertTrue($mapped->isValid());
     }
 
-    public function testMapThrowAnExceptionTheJsonFileIsInvalid()
+    public function testMapReturnAnInvalidMappedWhenTheJsonFileIsInvalid()
     {
         // we use an json file invalid
         $line = '{
@@ -56,13 +66,11 @@ class JsonMapperTest extends TestCase
       }
   }
 }';
-        $this->expectException(JsonParsingException::class);
-        $this->expectExceptionMessage("Unexpected symbol '}' At position 102.");
-
-        $this->currentTested->map($line);
+        $mapped = $this->currentTested->map($line);
+        $this->assertFalse($mapped->isValid());
     }
 
-    public function testMapThrowAnExceptionWhenExtractionPatternForOneOreMoreFieldIsNotFound()
+    public function testMapReturnAnInvalidMappedWhenExtractionPatternForOneOreMoreFieldIsNotFound()
     {
         // we use an json without body
         $line = '{
@@ -74,10 +82,8 @@ class JsonMapperTest extends TestCase
       }
   }
 }';
-        $this->expectException(JsonParsingException::class);
-        $this->expectExceptionMessage("Path '/payload/comment/body' was not found in json stream.");
-
-        $this->currentTested->map($line);
+        $mapped = $this->currentTested->map($line);
+        $this->assertFalse($mapped->isValid());
     }
 
     public function testMapReturnAnInvalidMappedWhenOneOrMoreFieldAreNotValidForExtraction()
@@ -94,14 +100,6 @@ class JsonMapperTest extends TestCase
   }
 }';
         $mapped = $this->currentTested->map($line);
-
-        $this->assertSame(
-            [
-                // the body is extracted and not the type ...
-                'body' => 'edited',
-            ],
-            iterator_to_array($mapped->getValues())
-        );
 
         // ... and the mapped is invalid
         $this->assertFalse($mapped->isValid());

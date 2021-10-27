@@ -7,11 +7,8 @@ namespace App\Domain;
 class RemoteFileList
 {
     public const GITHUB_ARCHIVE_REMOTE_BASE_URI = 'https://data.gharchive.org/';
-
     public const GITHUB_ARCHIVE_REMOTE_FILE_EXTENSION = '.json.gz';
-
     public const GITHUB_ARCHIVE_REMOTE_DATE_FORMAT = 'Y-m-d';
-
     private \DateTimeInterface $date;
 
     /**

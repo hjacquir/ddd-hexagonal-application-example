@@ -9,7 +9,6 @@ use Elao\Enum\Enum;
 class EventType extends Enum
 {
     public const COMMITCOMMENTEVENT = 'CommitCommentEvent';
-
     public const PULLREQUESTREVIEWCOMMENTEVENT = 'PullRequestReviewCommentEvent';
 
     /**

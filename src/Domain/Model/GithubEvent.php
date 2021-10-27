@@ -7,17 +7,11 @@ namespace App\Domain\Model;
 class GithubEvent implements Model
 {
     private int $id;
-
     private GithubEventType $type;
-
     private string $body;
-
     private int $hour;
-
     private string $repos;
-
     private string $uuid;
-
     private string $date;
 
     public function getDate(): string

@@ -31,6 +31,6 @@ class MappedTest extends TestCase
     public function testAddValue()
     {
         $this->currentTested->addValue('bla', 'foo');
-        $this->assertSame(['bla' => 'foo'], iterator_to_array($this->currentTested->getValues()));
+        $this->assertSame(['bla' => 'foo'], $this->currentTested->getValues());
     }
 }

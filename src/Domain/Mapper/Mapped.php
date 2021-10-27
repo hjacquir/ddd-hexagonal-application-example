@@ -5,7 +5,6 @@ namespace App\Domain\Mapper;
 class Mapped
 {
     private array $values = [];
-
     private bool $isValid = true;
 
     public function isValid(): bool
@@ -23,10 +22,8 @@ class Mapped
         $this->values[$key] = $value;
     }
 
-    public function getValues(): \Generator
+    public function getValues(): array
     {
-        foreach ($this->values as $key => $value) {
-            yield $key => $value;
-        }
+        return $this->values;
     }
 }

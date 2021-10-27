@@ -9,4 +9,6 @@ use App\Domain\Model\GithubEventType;
 interface GithubEventTypeRepository
 {
     public function save(GithubEventType $type): void;
+
+    public function findOneByLabel(string $label): GithubEventType;
 }

@@ -14,11 +14,8 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class MapFileData implements MessageHandlerInterface
 {
     private Parser $parser;
-
     private JsonMapper $jsonMapper;
-
     private MessageBusInterface $bus;
-
     private LoggerInterface $logger;
 
     public function __construct(

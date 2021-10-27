@@ -10,7 +10,5 @@ interface Field
 
     public function getName(): string;
 
-    public function getMappedValue(string $currentValue);
-
     public function isValidForExtraction(string $currentValue): bool;
 }

@@ -14,9 +14,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class ExtractDownloadedFile implements MessageHandlerInterface
 {
     private Extractor $extractor;
-
     private LoggerInterface $logger;
-
     private MessageBusInterface $bus;
 
     public function __construct(

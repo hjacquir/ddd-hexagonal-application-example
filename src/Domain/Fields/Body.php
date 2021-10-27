@@ -16,11 +16,6 @@ class Body implements Field
         return 'body';
     }
 
-    public function getMappedValue(string $currentValue): string
-    {
-        return $currentValue;
-    }
-
     public function isValidForExtraction(string $currentValue): bool
     {
         return true;

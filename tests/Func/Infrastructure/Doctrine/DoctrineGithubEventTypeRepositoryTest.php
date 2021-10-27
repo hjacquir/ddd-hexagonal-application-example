@@ -33,32 +33,11 @@ class DoctrineGithubEventTypeRepositoryTest extends KernelTestCase
         $this->currentTested = new DoctrineGithubEventTypeRepository(new Logger('test'), $this->entityManager);
     }
 
-    public function testSaveEventTypeWhenNoErrorOccurred()
-    {
-        $this->currentTested->save(
-            new GithubEventType(
-                EventType::get(EventType::PULLREQUESTREVIEWCOMMENTEVENT)
-            )
-        );
-
-        /** @var GithubEventType $type */
-        $type = $this->entityManager->find(GithubEventType::class, 1);
-
-        $this->assertSame(EventType::PULLREQUESTREVIEWCOMMENTEVENT, $type->getLabel());
-
-    }
-
     public function testSaveEventTypeWhenAnErrorOccurred()
     {
-        $this->currentTested->save(
-            new GithubEventType(
-                EventType::get(EventType::PULLREQUESTREVIEWCOMMENTEVENT)
-            )
-        );
-
         $this->expectException(InfrastructureException::class);
 
-        // we save the event type with the same label -> the label is unique -> we have integrity constraint violation
+        // we save the event type with the same label as inserted on migration -> the label is unique -> we have integrity constraint violation
         $this->currentTested->save(
             new GithubEventType(
                 EventType::get(EventType::PULLREQUESTREVIEWCOMMENTEVENT)

@@ -12,9 +12,7 @@ use Psr\Http\Client\ClientInterface;
 class Downloader
 {
     private ClientInterface $httpClient;
-
     private RemoteFileList $remoteFileListDownload;
-
     private string $localDownloadedFilesPath;
 
     /**

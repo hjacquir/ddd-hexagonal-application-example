@@ -42,7 +42,7 @@ You only need `make`, `docker` and `docker-compose` installed to start the devel
 ### Stack
 
 * PHP 7.4 with Xdebug
-* Symfony 4.4
+* Symfony 4.4 with Profiler Pack : symfony/profiler-pack
 * RabbitMQ 3.6
 * Adminer 4.7
 * PostgreSQL 13

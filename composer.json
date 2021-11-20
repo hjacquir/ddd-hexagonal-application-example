@@ -74,6 +74,8 @@
     "require-dev": {
         "symfony/browser-kit": "^4.4",
         "symfony/css-selector": "^4.4",
-        "symfony/phpunit-bridge": "^5.2"
+        "symfony/phpunit-bridge": "^5.2",
+        "symfony/stopwatch": "4.4.*",
+        "symfony/web-profiler-bundle": "4.4.*"
     }
 }

@@ -67,6 +67,8 @@ class DownloadGithubArchive extends Command
               $this->bus->dispatch(new DownloadedFile($downloadRemoteFile));
             }
 
+            $this->logger->info("All remote files are downloaded successfully. Bye !");
+
             return self::COMMAND_FINISHED_WITH_SUCCESS;
         } catch (\Throwable $e) {
             $this->logger->error("Failed to download remote files",

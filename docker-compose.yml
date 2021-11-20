@@ -18,7 +18,7 @@ services:
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: clean-archi
+      POSTGRES_DB: app
 
   adminer:
     image: adminer:4.7

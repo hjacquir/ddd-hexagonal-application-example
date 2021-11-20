@@ -1,10 +1,16 @@
 # DDD-hexagonal-application-example
 
+## Description
+
 This project is an example of hexagonal architecture with an DDD (Domain Driven Design) application on a use case. 
 
-## More information about hexagonal architecture
+### More information about hexagonal architecture
 
 https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)
+
+## Context schema
+
+![](schema.png)
 
 ## Use case
 
@@ -12,18 +18,14 @@ Implement a REST API in PHP which makes it possible to query the presence of a k
 the commits messages of a given day on [GH Archive] (https://www.gharchive.org /).
 For example a curve of the number of commits during the day of 2018-01-01 which have the keyword "fix".
 
-## Context schema
-
-![](schema.png)
-
-## Features
+### Features
 
 * Implement a command line client to download the archives for
   a given day and store them in the database.
 
 * Expose an API allowing to query the database using a keyword and a date.
 
-## Scenario
+### Scenario
 
 ```Gherkin
 When I enter a date and a keyword
@@ -33,13 +35,32 @@ And the total number by type of events per hour is displayed
 And the last 5 commits are visible
 ```
 
-## Requirements
-
-* PHP > 7.4
-
 ## Use development environment :computer:
 
 You only need `make`, `docker` and `docker-compose` installed to start the development environment.
+
+### Stack
+
+* PHP 7.4 with Xdebug
+* Symfony 4.4
+* RabbitMQ 3.6
+* Adminer 4.7
+* PostgreSQL 13
+* COMING SOON :
+  * Redis
+
+#### Connect to RabbitMQ
+
+* url : http://localhost:15672
+* id/mdp : guest/guest
+
+#### Connect to Adminer
+
+* url : http://localhost:8080/
+* server : postgres
+* username : user
+* password: password
+* database : app
 
 ### Start the development environment
 

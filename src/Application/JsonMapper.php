@@ -57,6 +57,7 @@ class JsonMapper implements Mapper
             $this->logger->error(
                 'An error occurred when trying to map the json string.',
                 [
+                    'json string' => $string,
                     'error message' => $exception->getMessage(),
                 ]
             );

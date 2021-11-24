@@ -34,13 +34,13 @@ class MapFileData implements MessageHandlerInterface
     {
         $fileName = $extractedFile->getFileName();
 
-            foreach ($this->parser->getLines($fileName) as $line) {
-                $mapped = $this->jsonMapper->map($line);
+        foreach ($this->parser->getLines($fileName) as $line) {
+            $mapped = $this->jsonMapper->map($line);
 
-                if (true === $mapped->isValid()) {
-                    $this->logger->info('Mapped successfully');
-                    $this->bus->dispatch($mapped);
-                }
+            if (true === $mapped->isValid()) {
+                $this->logger->info('Mapped successfully');
+                $this->bus->dispatch($mapped);
             }
+        }
     }
 }

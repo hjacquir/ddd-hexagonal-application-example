@@ -46,8 +46,7 @@ You only need `make`, `docker` and `docker-compose` installed to start the devel
 * RabbitMQ 3.6
 * Adminer 4.7
 * PostgreSQL 13
-* COMING SOON :
-  * Redis
+* Redis
 
 #### Connect to RabbitMQ
 
@@ -61,6 +60,10 @@ You only need `make`, `docker` and `docker-compose` installed to start the devel
 * username : user
 * password: password
 * database : app
+
+### Connect to redis container
+
+`docker exec -it app_redis sh` and `redis-cli`
 
 ### Start the development environment
 

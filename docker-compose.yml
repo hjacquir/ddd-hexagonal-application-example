@@ -1,6 +1,7 @@
 version: '3.4'
 services:
   php:
+    container_name: app_php
     user: ${FIXUID:-1000}:${FIXGID:-1000}
     build:
       context: ./docker
@@ -12,9 +13,11 @@ services:
       COMPOSER_HOME: /tmp/composer
     depends_on:
       - postgres
+      - redis
 
   postgres:
     image: postgres:13-alpine
+    container_name: app_postgres
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
@@ -22,6 +25,7 @@ services:
 
   adminer:
     image: adminer:4.7
+    container_name: app_adminer
     links:
       - "postgres:db"
     ports:
@@ -29,6 +33,7 @@ services:
 
   rabbitmq:
     image: 'rabbitmq:3.6-management-alpine'
+    container_name: app_rabbitmq
     ports:
       - '5672:5672'
       - '15672:15672'
@@ -36,3 +41,10 @@ services:
       AMQP_URL: 'amqp://rabbitmq?connection_attempts=5&retry_delay=5'
       RABBITMQ_DEFAULT_USER: "guest"
       RABBITMQ_DEFAULT_PASS: "guest"
+
+  redis:
+    image: "redis:alpine"
+    container_name: app_redis
+    hostname: redis
+    ports:
+      - "6379:6379"

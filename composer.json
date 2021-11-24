@@ -20,7 +20,9 @@
         "symfony/framework-bundle": "4.4.*",
         "symfony/messenger": "4.4.*",
         "symfony/monolog-bundle": "^3.7",
+        "symfony/property-access": "4.4.*",
         "symfony/proxy-manager-bridge": "4.4.*",
+        "symfony/serializer": "4.4.*",
         "symfony/yaml": "4.4.*"
     },
     "config": {

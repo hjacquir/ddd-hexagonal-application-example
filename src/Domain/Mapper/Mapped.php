@@ -26,4 +26,12 @@ class Mapped
     {
         return $this->values;
     }
+
+    /**
+     * @param array $values
+     */
+    public function setValues(array $values)
+    {
+        $this->values = $values;
+    }
 }

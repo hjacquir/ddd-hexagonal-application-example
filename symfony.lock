@@ -99,6 +99,15 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },
+    "friendsofsymfony/rest-bundle": {
+        "version": "3.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "fa845143b7e0a4c70aedd1a88c549e6d977e9ae5"
+        }
+    },
     "guzzlehttp/guzzle": {
         "version": "7.3.0"
     },
@@ -351,6 +360,9 @@
             "config/routes.yaml"
         ]
     },
+    "symfony/security-core": {
+        "version": "v4.4.34"
+    },
     "symfony/serializer": {
         "version": "v4.4.35"
     },
@@ -408,5 +420,11 @@
     },
     "twig/twig": {
         "version": "v3.3.3"
+    },
+    "willdurand/jsonp-callback-validator": {
+        "version": "v1.1.0"
+    },
+    "willdurand/negotiation": {
+        "version": "3.0.0"
     }
 }

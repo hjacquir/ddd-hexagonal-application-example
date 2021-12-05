@@ -11,6 +11,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
         "elao/enum": "^1.16",
+        "friendsofsymfony/rest-bundle": "^3.1",
         "guzzlehttp/guzzle": "^7.3",
         "halaxa/json-machine": "^0.7.0",
         "matomo/decompress": "^2.1",

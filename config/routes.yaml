@@ -1,4 +1,0 @@
-api_github_event_list:
-    path: api/github-events
-    controller: App\Application\Controller\GithubEventController::list
-    methods: ['GET']

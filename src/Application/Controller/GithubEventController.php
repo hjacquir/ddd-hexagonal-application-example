@@ -4,15 +4,28 @@ declare(strict_types=1);
 
 namespace App\Application\Controller;
 
-use App\Domain\Repository\GithubEventRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Domain\Model\GithubEvent;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\View\View as FosRestView;
 use Symfony\Component\HttpFoundation\Response;
 
-class GithubEventController extends AbstractController
+class GithubEventController extends AbstractFOSRestController
 {
-    public function list(): Response
+    /**
+     * @Get(
+     *     path = "/github-events/{id}",
+     *     name = "github_events_show",
+     *     requirements = {"id"="\d+"}
+     * )
+     * @View
+     */
+    public function show(GithubEvent $githubEvent): FosRestView
     {
-        return new JsonResponse("Event list");
+        return $this->view(
+            $githubEvent,
+            Response::HTTP_FOUND
+        );
     }
 }

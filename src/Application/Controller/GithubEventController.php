@@ -19,7 +19,9 @@ class GithubEventController extends AbstractFOSRestController
      *     name = "github_events_show",
      *     requirements = {"id"="\d+"}
      * )
-     * @View
+     * @View(
+     *     serializerGroups = {"show"}
+     * )
      */
     public function show(GithubEvent $githubEvent): FosRestView
     {

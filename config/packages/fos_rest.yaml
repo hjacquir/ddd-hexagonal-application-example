@@ -8,6 +8,6 @@ fos_rest:
     enabled: true
   format_listener:
     rules:
-      - { path: '^/', priorities: [ 'json' ], fallback_format: 'json' }
+      - { path: '^/api/', priorities: [ 'json' ], fallback_format: 'json' }
   exception:
     enabled: true

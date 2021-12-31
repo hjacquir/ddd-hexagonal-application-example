@@ -15,7 +15,7 @@ class GithubEventController extends AbstractFOSRestController
 {
     /**
      * @Get(
-     *     path = "/github-events/{id}",
+     *     path = "/api/github-events/{id}",
      *     name = "github_events_show",
      *     requirements = {"id"="\d+"}
      * )

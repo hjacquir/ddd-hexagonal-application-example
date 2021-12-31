@@ -1,4 +1,4 @@
 framework:
   serializer:
     mapping:
-      paths: [ '%kernel.project_dir%/src/Application/Serializer/group' ]
+      paths: [ '%kernel.project_dir%/src/Application/Serializer/mapping' ]

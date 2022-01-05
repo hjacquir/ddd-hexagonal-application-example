@@ -4,6 +4,19 @@ declare(strict_types=1);
 
 namespace App\Domain\Model;
 
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
+
+/**
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "github_events_show",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute=true
+ *      )
+ * )
+ */
 class GithubEvent implements Model
 {
     private int $id;

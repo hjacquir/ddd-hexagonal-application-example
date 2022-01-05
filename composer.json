@@ -14,6 +14,7 @@
         "friendsofsymfony/rest-bundle": "^3.1",
         "guzzlehttp/guzzle": "^7.3",
         "halaxa/json-machine": "^0.7.0",
+        "jms/serializer-bundle": "^4.0",
         "matomo/decompress": "^2.1",
         "sensio/framework-extra-bundle": "^6.2",
         "symfony/console": "5.4.*",
@@ -25,13 +26,18 @@
         "symfony/property-access": "5.4.*",
         "symfony/proxy-manager-bridge": "4.4.*",
         "symfony/serializer": "5.4.*",
-        "symfony/yaml": "5.4.*"
+        "symfony/yaml": "5.4.*",
+        "willdurand/hateoas-bundle": "^2.4"
     },
     "config": {
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "symfony/flex": true
+        }
     },
     "autoload": {
         "psr-4": {

@@ -5,10 +5,20 @@ declare(strict_types=1);
 namespace App\Domain\Model;
 
 use App\Domain\Enum\EventType;
+use JMS\Serializer\Annotation as Serializer;
 
+/**
+ * @Serializer\ExclusionPolicy("ALL")
+ */
 class GithubEventType implements Model
 {
+    /**
+     *  @Serializer\Expose
+     */
     private int $id;
+    /**
+     *  @Serializer\Expose
+     */
     private string $label;
     private EventType $enumEventType;
 

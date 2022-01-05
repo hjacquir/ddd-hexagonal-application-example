@@ -23,8 +23,14 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class GithubEvent implements Model
 {
+    /**
+     * @Serializer\Since("1.0")
+     */
     private int $id;
     private GithubEventType $type;
+    /**
+     * @Serializer\Since("2.0")
+     */
     private string $body;
     private int $hour;
     private string $repos;

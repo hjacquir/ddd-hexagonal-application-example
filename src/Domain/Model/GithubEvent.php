@@ -16,6 +16,10 @@ use JMS\Serializer\Annotation as Serializer;
  *          absolute=true
  *      )
  * )
+ * @Hateoas\Relation(
+ *     "type",
+ *     embedded = @Hateoas\Embedded("expr(object.getType())")
+ * )
  */
 class GithubEvent implements Model
 {

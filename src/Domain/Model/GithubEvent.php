@@ -4,33 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Model;
 
-use Hateoas\Configuration\Annotation as Hateoas;
-use JMS\Serializer\Annotation as Serializer;
-
-/**
- * @Hateoas\Relation(
- *      "self",
- *      href = @Hateoas\Route(
- *          "github_events_show",
- *          parameters = { "id" = "expr(object.getId())" },
- *          absolute=true
- *      )
- * )
- * @Hateoas\Relation(
- *     "type",
- *     embedded = @Hateoas\Embedded("expr(object.getType())")
- * )
- */
 class GithubEvent implements Model
 {
-    /**
-     * @Serializer\Since("1.0")
-     */
     private int $id;
     private GithubEventType $type;
-    /**
-     * @Serializer\Since("2.0")
-     */
     private string $body;
     private int $hour;
     private string $repos;

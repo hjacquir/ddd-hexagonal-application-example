@@ -60,6 +60,14 @@ var/docker.up: var/docker.build vendor
 	@$(call log,View to the API documentation: http://127.0.0.1:8000/)
 	@$(call log_success,Done)
 
+restart: var/docker.up ## Start the docker stack
+var/docker.up: var/docker.build vendor
+	@$(call log,Starting the docker stack ...)
+	@$(DOCKER_COMPOSE) up -d
+	@$(call touch,var/docker.up)
+	@$(call log,View to the API documentation: http://127.0.0.1:8000/)
+	@$(call log_success,Done)
+
 .PHONY: stop
 stop: ## Stop the docker stack
 	@$(call log,Stopping the docker stack ...)

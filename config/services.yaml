@@ -30,3 +30,7 @@ services:
         arguments:
             $client: '@guzzle'
             $localDownloadFilePath: '%env(LOCAL_DOWNLOADED_FILE_PATH)%'
+    Nelmio\ApiDocBundle\:
+        resource: '../vendor/nelmio/'
+        autowire: true
+

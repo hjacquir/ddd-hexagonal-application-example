@@ -10,7 +10,6 @@ use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\View\View as FosRestView;
 use Symfony\Component\HttpFoundation\Response;
-use Hateoas\Configuration\Annotation as Hateoas;
 
 class GithubEventController extends AbstractFOSRestController
 {

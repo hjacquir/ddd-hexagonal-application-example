@@ -132,10 +132,13 @@ The project follows the PSR12 standard.
 
 ### Download Github archive remote file
 
-* Define in your .env configuration file the path to the directory that will store the downloaded archive files :
+* Define in your .env.local configuration file the path to the directory that will store the downloaded archive files :
   `LOCAL_DOWNLOADED_FILE_PATH`
-* Enter in your shell (`make shell`) and launch the command : `bin/console app:download 2014-02-01` with the date to fetch (e.g : 2012-02-02 here)
-  to verbose all log message add the options : `-vvv` like `bin/console app:download 2014-02-01 -vvv`
+* Enter in your shell (`make shell`) and launch the command : `bin/console app:download 2014-02-01 0 1` with the date to fetch (e.g : 2012-02-02 here)
+  to verbose all log message add the options : `-vvv` like `bin/console app:download 2014-02-01 0 1 -vvv`. Arguments (all are required): 
+  * The date to fetch
+  * The time of the first file to download (between 0 and 23)
+  * The time of the last file to download (between 0 and 23)
 * The files are downloaded into the local folder and a message was sent to rabbitmq with the filename
 
 ### Extract downloaded file

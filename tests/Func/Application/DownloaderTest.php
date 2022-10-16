@@ -7,6 +7,7 @@ use App\Application\Downloader;
 use App\Application\Exception\FileDownloadException;
 use App\Application\Exception\FolderNotExistException;
 use App\Domain\RemoteFileList;
+use App\Domain\TimeRangeOfFileToDownload;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
@@ -33,7 +34,7 @@ class DownloaderTest extends TestCase
         $this->expectException(FolderNotExistException::class);
         $this->expectExceptionMessage('The folder [' . $localDownloadedFilesPath . '] does not exist.');
 
-        $downloader->downloadRemoteFiles()->current();
+        $downloader->downloadRemoteFiles(new TimeRangeOfFileToDownload(0, 0))->current();
     }
 
     public function testDownloadRemoteFilesThrownExceptionWhenRemoteDownloadFail()
@@ -60,7 +61,7 @@ class DownloaderTest extends TestCase
         $this->expectExceptionMessage('Mocked exception message is thrown');
         $this->expectException(FileDownloadException::class);
 
-        $downloader->downloadRemoteFiles()->current();
+        $downloader->downloadRemoteFiles(new TimeRangeOfFileToDownload(0, 0))->current();
     }
 
     public function testDownloadRemoteFiles()
@@ -83,7 +84,7 @@ class DownloaderTest extends TestCase
             $localDownloadedFilesPath
         );
 
-        $downloaded = $downloader->downloadRemoteFiles()->current();
+        $downloaded = $downloader->downloadRemoteFiles(new TimeRangeOfFileToDownload(0, 0))->current();
         $this->assertStringContainsString('.json.gz', $downloaded);
         // after the test we remove the downloaded file
         unlink($downloaded);

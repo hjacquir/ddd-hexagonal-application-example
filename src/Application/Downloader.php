@@ -7,6 +7,7 @@ namespace App\Application;
 use App\Application\Exception\FileDownloadException;
 use App\Application\Exception\FolderNotExistException;
 use App\Domain\RemoteFileList;
+use App\Domain\TimeRangeOfFileToDownload;
 use Psr\Http\Client\ClientInterface;
 
 class Downloader
@@ -22,8 +23,8 @@ class Downloader
      */
     public function __construct(
         ClientInterface $httpClient,
-        RemoteFileList $remoteFileListDownload,
-        string $localDownloadedFilesPath
+        RemoteFileList  $remoteFileListDownload,
+        string          $localDownloadedFilesPath
     )
     {
         $this->httpClient = $httpClient;
@@ -35,13 +36,13 @@ class Downloader
      * @throws FileDownloadException
      * @throws FolderNotExistException
      */
-    public function downloadRemoteFiles(): \Generator
+    public function downloadRemoteFiles(TimeRangeOfFileToDownload $timeRangeOfFileToDownload): \Generator
     {
         if (false === \is_dir($this->localDownloadedFilesPath)) {
             throw new FolderNotExistException('The folder [' . $this->localDownloadedFilesPath . '] does not exist.');
         }
 
-        foreach ($this->remoteFileListDownload->getFileListForOneDay() as $fileNameWithoutRemoteUri => $remoteFileUrl) {
+        foreach ($this->remoteFileListDownload->getFileListForOneDay($timeRangeOfFileToDownload) as $fileNameWithoutRemoteUri => $remoteFileUrl) {
             try {
                 $this->httpClient->request(
                     'GET',

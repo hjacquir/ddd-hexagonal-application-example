@@ -30,7 +30,7 @@ class ListResponse
         $contraintViolations = $validator->validate($this);
         // we validate the request parameter here and do not this in the client
         if (count($contraintViolations) > 0) {
-            throw new BadRequestException((string) $contraintViolations->get(0)->getMessage());
+            throw new BadRequestException($contraintViolations->get(0)->getMessage());
         }
     }
 

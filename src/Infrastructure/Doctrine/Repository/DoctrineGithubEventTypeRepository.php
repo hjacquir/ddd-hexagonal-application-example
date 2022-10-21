@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Doctrine;
+namespace App\Infrastructure\Doctrine\Repository;
 
-use App\Domain\Model\GithubEvent;
-use App\Domain\Repository\GithubEventRepository;
+use App\Domain\Model\GithubEventType;
+use App\Domain\Repository\GithubEventTypeRepository;
+use App\Infrastructure\Doctrine\DoctrinePersistenceException;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 
-class DoctrineGithubEventRepository implements GithubEventRepository
+class DoctrineGithubEventTypeRepository implements GithubEventTypeRepository
 {
     private EntityManagerInterface $entityManager;
     private LoggerInterface $logger;
@@ -23,15 +24,15 @@ class DoctrineGithubEventRepository implements GithubEventRepository
     /**
      * @throws DoctrinePersistenceException
      */
-    public function save(GithubEvent $event): void
+    public function save(GithubEventType $type): void
     {
         try {
-            $this->entityManager->persist($event);
+            $this->entityManager->persist($type);
             $this->entityManager->flush();
         } catch (\Throwable $e) {
             $this->logger
                 ->error(
-                    'An exception occurred when trying to persist the event : ' . $e->getMessage(),
+                    'An exception occurred when trying to persist the event type : ' . $e->getMessage(),
                 );
 
             throw new DoctrinePersistenceException(
@@ -40,5 +41,15 @@ class DoctrineGithubEventRepository implements GithubEventRepository
                 $e
             );
         }
+    }
+
+    public function findOneByLabel(string $label): GithubEventType
+    {
+        return $this->entityManager->getRepository(GithubEventType::class)
+            ->findOneBy(
+                [
+                    'label' => $label
+                ]
+            );
     }
 }

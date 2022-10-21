@@ -130,6 +130,10 @@ The project follows the PSR12 standard.
 
 ## Usage
 
+### Update database
+
+Execute doctrine migrations : `make shell` and `bin/console d:m:m`
+
 ### Download Github archive remote file
 
 * Define in your .env.local configuration file the path to the directory that will store the downloaded archive files :

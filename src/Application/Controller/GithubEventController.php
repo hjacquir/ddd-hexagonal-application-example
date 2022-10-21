@@ -15,6 +15,7 @@ use FOS\RestBundle\View\View as FosRestView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use OpenApi\Annotations as OA;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class GithubEventController extends AbstractFOSRestController
 {
@@ -71,9 +72,12 @@ class GithubEventController extends AbstractFOSRestController
      * )
      * @OA\Tag(name="githubEvent")
      */
-    public function list(Request $request, GithubEventRepository $githubEventRepository): ListResponse
-    {
-        $listResponse = new ListResponse($request);
+    public function list(
+        Request $request,
+        GithubEventRepository $githubEventRepository,
+        ValidatorInterface $validator
+    ): ListResponse {
+        $listResponse = new ListResponse($request, $validator);
 
         $datas = $githubEventRepository->getFiltered(
             new DoctrineQueryFilter(

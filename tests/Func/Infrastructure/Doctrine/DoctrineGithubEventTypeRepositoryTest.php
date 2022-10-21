@@ -6,7 +6,7 @@ namespace App\Tests\Func\Infrastructure\Doctrine;
 
 use App\Domain\Enum\EventType;
 use App\Domain\Model\GithubEventType;
-use App\Infrastructure\Doctrine\DoctrineGithubEventTypeRepository;
+use App\Infrastructure\Doctrine\Repository\DoctrineGithubEventTypeRepository;
 use App\Infrastructure\InfrastructureException;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;

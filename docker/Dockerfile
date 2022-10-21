@@ -25,9 +25,11 @@ RUN \
 # Install make
 RUN apk add --no-cache make
 
+RUN apk add libxml2-dev
+
 # Install php extensions
 RUN apk add --no-cache postgresql-dev \
-    && docker-php-ext-install -j$(nproc) pdo_pgsql
+    && docker-php-ext-install -j$(nproc) pdo_pgsql xml
 
 RUN apk add --no-cache --virtual .persistent-deps \
     # for amqp

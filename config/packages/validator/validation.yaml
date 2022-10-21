@@ -1,0 +1,14 @@
+App\Application\ListResponse:
+    properties:
+        page:
+          - GreaterThan:
+              value: 0
+              message: Invalid query parameter provided, page must be an integer and greater than 0
+        maxPerPage:
+          - GreaterThan:
+              value: 0
+              message: Invalid query parameter provided, max_per_page must be an integer and greater than 0
+        sort:
+          - Choice:
+              choices: [ASC, DESC]
+              message: Invalid query parameter provided, sort can only accept ASC and DESC

@@ -29,6 +29,7 @@
         "symfony/proxy-manager-bridge": "4.4.*",
         "symfony/serializer": "5.4.*",
         "symfony/twig-bundle": "5.4.*",
+        "symfony/validator": "5.4.*",
         "symfony/yaml": "5.4.*",
         "willdurand/hateoas-bundle": "^2.4"
     },

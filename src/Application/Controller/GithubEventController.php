@@ -51,19 +51,19 @@ class GithubEventController extends AbstractFOSRestController
      *     name="page",
      *     in="query",
      *     description="The current page value (type=integer, default=1)",
-     *     example="page=1",
+     *     example="1",
      * )
      * @OA\Parameter(
      *     name="max_per_page",
      *     in="query",
      *     description="The max itemps per page value (type=integer, default=5)",
-     *     example="max_per_page=10"
+     *     example="10"
      * )
      * @OA\Parameter(
      *     name="sort",
      *     in="query",
      *     description="The order item value by id (type=string, possible values='ASC or DESC', default=ASC)",
-     *     example="sort=DESC",
+     *     example="DESC",
      * )
      * @OA\Response(
      *     response=200,

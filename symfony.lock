@@ -427,8 +427,29 @@
             "config/routes.yaml"
         ]
     },
+    "symfony/security-bundle": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.3",
+            "ref": "98f1f2b0d635908c2b40f3675da2d23b1a069d30"
+        },
+        "files": [
+            "config/packages/security.yaml"
+        ]
+    },
     "symfony/security-core": {
         "version": "v4.4.34"
+    },
+    "symfony/security-csrf": {
+        "version": "v5.4.11"
+    },
+    "symfony/security-guard": {
+        "version": "v5.4.13"
+    },
+    "symfony/security-http": {
+        "version": "v5.4.13"
     },
     "symfony/serializer": {
         "version": "v5.4.2"

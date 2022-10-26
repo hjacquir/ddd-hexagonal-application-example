@@ -14,5 +14,5 @@ doctrine:
                 is_bundle: false
                 type: xml
                 dir: '%kernel.project_dir%/src/Infrastructure/Doctrine/mapping'
-                prefix: 'App\Domain\Model'
+                prefix: 'App'
                 alias: App

@@ -51,11 +51,9 @@ shell: start ## Enter in the PHP container
 	@$(call log,Entering inside php container ...)
 	@$(DOCKER_COMPOSE) exec php ash
 
-start: var/docker.up ## Start the docker stack
-var/docker.up: var/docker.build vendor
+start:
 	@$(call log,Starting the docker stack ...)
 	@$(DOCKER_COMPOSE) up -d
-	@$(call touch,var/docker.up)
 	$(MAKE) db
 	@$(call log,View the API documentation at : http://127.0.0.1:8000/api/doc)
 	@$(call log_success,Done)
@@ -88,8 +86,8 @@ vendor: var/docker.build composer.json composer.lock ## Install composer depende
 	@$(PHP_RUN) composer install
 	@$(call log_success,Done)
 
-.PHONY: db
-db: var/docker.build
+
+db:
 	@$(call log,Preparing db ...)
 	@$(PHP_RUN) waitforit -host=postgres -port=5432
 	@$(PHP_RUN) bin/console -v -n doctrine:database:drop --if-exists --force

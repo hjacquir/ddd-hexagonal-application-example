@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Domain\Model;
 
-use App\Domain\Enum\EventType;
+use App\Domain\EventType;
 use App\Domain\Model\GithubEventType;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -16,15 +15,11 @@ class GithubEventTypeTest extends TestCase
 {
     private GithubEventType $currentTested;
 
-    private MockObject $type;
+    private EventType $type;
 
     public function setUp(): void
     {
-        $this->type = $this->createMock(EventType::class);
-        $this->type
-            ->expects($this->once())
-            ->method('getValue')
-            ->willReturn('bla');
+        $this->type = EventType::PullRequestReviewCommentEvent;
 
         $this->currentTested = new GithubEventType($this->type);
     }
@@ -37,6 +32,6 @@ class GithubEventTypeTest extends TestCase
 
     public function testGetSetLabel(): void
     {
-        $this->assertSame('bla', $this->currentTested->getLabel());
+        $this->assertSame('PullRequestReviewCommentEvent', $this->currentTested->getLabel());
     }
 }

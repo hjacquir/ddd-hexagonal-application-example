@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Model;
 
-use App\Domain\Enum\EventType;
+use App\Domain\EventType;
 
 class GithubEventType implements Model
 {
@@ -16,8 +16,7 @@ class GithubEventType implements Model
     {
         $this->enumEventType = $enumEventType;
         // we initialize the label type with the event type enum value
-        $this->label = $this->enumEventType
-            ->getValue();
+        $this->label = $this->enumEventType->name;
     }
 
     public function getId(): int

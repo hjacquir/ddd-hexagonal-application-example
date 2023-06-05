@@ -84,18 +84,6 @@
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
-    "elao/enum": {
-        "version": "1.7",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "1.7",
-            "ref": "d44e1c8caa4cabcab399724df787de558459dd83"
-        },
-        "files": [
-            "config/packages/elao_enum.yaml"
-        ]
-    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },

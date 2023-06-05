@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Fields;
 
-use App\Domain\Enum\EventType;
+use App\Domain\EventType;
 
 class Type implements Field
 {
@@ -20,6 +20,6 @@ class Type implements Field
 
     public function isValidForExtraction(string $currentValue): bool
     {
-        return true === in_array($currentValue, EventType::values());
+        return true === in_array($currentValue, array_column(EventType::cases(), 'name'));
     }
 }

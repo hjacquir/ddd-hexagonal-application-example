@@ -2,17 +2,27 @@
 
 declare(strict_types=1);
 
-namespace App\Application;
+namespace App\Infrastructure\Doctrine\Entity;
 
-use App\Domain\User as DomainUser;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use App\Domain\Model\UserInterface;
+use Doctrine\ORM\Mapping as ORM;
 
-class User implements DomainUser, UserInterface, PasswordAuthenticatedUserInterface
+#[ORM\Entity]
+#[ORM\Table(name: 'app_user')]
+class User implements UserInterface
 {
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column]
     private int $id;
+
+    #[ORM\Column(unique: true)]
     private string $login;
+
+    #[ORM\Column]
     private string $password;
+
+    #[ORM\Column]
     private array $roles = [];
 
     public function setPassword(string $password): self
@@ -61,25 +71,5 @@ class User implements DomainUser, UserInterface, PasswordAuthenticatedUserInterf
     public function getPassword(): ?string
     {
         return $this->password;
-    }
-
-    public function getSalt()
-    {
-        return null;
-    }
-
-    public function eraseCredentials()
-    {
-        // TODO: Implement eraseCredentials() method.
-    }
-
-    public function getUsername()
-    {
-        // TODO: Implement getUsername() method.
-    }
-
-    public function getUserIdentifier(): string
-    {
-        return $this->login;
     }
 }

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Doctrine\Repository;
 
-use App\Domain\Model\GithubEvent;
+use App\Domain\Model\GithubEventInterface;
 use App\Domain\QueryFilter;
 use App\Domain\Repository\GithubEventRepository;
 use App\Infrastructure\Doctrine\DoctrinePersistenceException;
 use App\Infrastructure\Doctrine\DoctrineQueryFilter;
+use App\Infrastructure\Doctrine\Entity\GitHubEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 
@@ -26,7 +27,7 @@ class DoctrineGithubEventRepository implements GithubEventRepository
     /**
      * @throws DoctrinePersistenceException
      */
-    public function save(GithubEvent $event): void
+    public function save(GithubEventInterface $event): void
     {
         try {
             $this->entityManager->persist($event);
@@ -49,7 +50,7 @@ class DoctrineGithubEventRepository implements GithubEventRepository
     {
         $queryParameters = $queryFilter->getParameters();
 
-        return $this->entityManager->getRepository(GithubEvent::class)
+        return $this->entityManager->getRepository(GitHubEvent::class)
             ->createQueryBuilder('ge')
             ->orderBy('ge.id', $queryParameters[DoctrineQueryFilter::SORT_CRITERIA])
             ->setMaxResults($queryParameters[DoctrineQueryFilter::MAX_RESULTS])

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Application\Controller;
 
 use App\Application\ListResponse;
-use App\Domain\Model\GithubEvent;
 use App\Domain\Repository\GithubEventRepository;
 use App\Infrastructure\Doctrine\DoctrineQueryFilter;
+use App\Infrastructure\Doctrine\Entity\GitHubEvent;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -33,7 +33,7 @@ class GithubEventController extends AbstractFOSRestController
      * )
      * @OA\Tag(name="githubEvent")
      */
-    public function show(GithubEvent $githubEvent): FosRestView
+    public function show(GitHubEvent $githubEvent): FosRestView
     {
         return $this->view(
             $githubEvent,

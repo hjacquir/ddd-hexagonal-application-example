@@ -10,9 +10,9 @@ use App\Domain\Fields\Repo;
 use App\Domain\Fields\Type;
 use App\Domain\Fields\Uuid;
 use App\Domain\Mapper\Mapped;
-use App\Domain\Model\GithubEvent;
 use App\Domain\Repository\GithubEventRepository;
 use App\Domain\Repository\GithubEventTypeRepository;
+use App\Infrastructure\Doctrine\Entity\GitHubEvent;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
@@ -52,25 +52,20 @@ class LoadMappedData implements MessageHandlerInterface
         try {
             $values = $mapped->getValues();
 
-            $ghEvent = new GithubEvent();
-
             $type = $this->githubEventTypeRepository->findOneByLabel($values[$this->type->getName()]);
-            $ghEvent->setType($type);
-
-            $ghEvent->setBody($values[$this->body->getName()]);
-
             $uuid = $values[$this->uuid->getName()];
-            $ghEvent->setUuid($uuid);
-
-            $ghEvent->setRepos($values[$this->repo->getName()]);
-
-            $eventDate = $values[$this->date->getName()];
-            $ghEvent->setDate($eventDate);
 
             // we extract the hour from date before to set it
-            $date = new \DateTime($eventDate);
-            $hour = (int) $date->format('H');
-            $ghEvent->setHour($hour);
+            $eventDate = new \DateTime($values[$this->date->getName()]);
+            $hour = (int) $eventDate->format('H');
+
+            $ghEvent = new GitHubEvent();
+            $ghEvent->setGithubEventType($type);
+            $ghEvent->setBody($values[$this->body->getName()]);
+            $ghEvent->setUuid($uuid);
+            $ghEvent->setRepos($values[$this->repo->getName()]);
+            $ghEvent->setEventDate($eventDate);
+            $ghEvent->setEventHour($hour);
 
             $this->githubEventRepository->save($ghEvent);
 

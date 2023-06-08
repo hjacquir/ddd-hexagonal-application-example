@@ -7,12 +7,11 @@ doctrine:
         #server_version: '13'
     orm:
         auto_generate_proxy_classes: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
-        auto_mapping: true
-        mappings:
-            App:
-                is_bundle: false
-                type: xml
-                dir: '%kernel.project_dir%/src/Infrastructure/Doctrine/mapping'
-                prefix: 'App'
-                alias: App
+        entity_managers:
+            default:
+                mappings:
+                    App:
+                        type: attribute
+                        is_bundle: false
+                        prefix: 'App'
+                        dir: "%kernel.project_dir%/src/Infrastructure/Doctrine/Entity/"

@@ -23,10 +23,9 @@ class Downloader
      */
     public function __construct(
         ClientInterface $httpClient,
-        RemoteFileList  $remoteFileListDownload,
-        string          $localDownloadedFilesPath
-    )
-    {
+        RemoteFileList $remoteFileListDownload,
+        string $localDownloadedFilesPath
+    ) {
         $this->httpClient = $httpClient;
         $this->remoteFileListDownload = $remoteFileListDownload;
         $this->localDownloadedFilesPath = $localDownloadedFilesPath;

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Doctrine\Repository;
 
+use App\Domain\Model\UserInterface;
 use App\Domain\Repository\UserRepository as DomainUserRepository;
-use App\Domain\User;
 use App\Infrastructure\Doctrine\DoctrinePersistenceException;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -24,7 +24,7 @@ class UserRepository implements DomainUserRepository
     /**
      * @throws DoctrinePersistenceException
      */
-    public function save(User $user): void
+    public function save(UserInterface $user): void
     {
         try {
             $this->entityManager->persist($user);

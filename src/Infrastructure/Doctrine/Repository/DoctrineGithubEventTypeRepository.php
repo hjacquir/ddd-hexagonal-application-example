@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Doctrine\Repository;
 
-use App\Domain\Model\GithubEventType;
+use App\Domain\Model\GithubEventTypeInterface;
 use App\Domain\Repository\GithubEventTypeRepository;
 use App\Infrastructure\Doctrine\DoctrinePersistenceException;
+use App\Infrastructure\Doctrine\Entity\GitHubEventType;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 
@@ -24,7 +25,7 @@ class DoctrineGithubEventTypeRepository implements GithubEventTypeRepository
     /**
      * @throws DoctrinePersistenceException
      */
-    public function save(GithubEventType $type): void
+    public function save(GithubEventTypeInterface $type): void
     {
         try {
             $this->entityManager->persist($type);
@@ -43,9 +44,9 @@ class DoctrineGithubEventTypeRepository implements GithubEventTypeRepository
         }
     }
 
-    public function findOneByLabel(string $label): GithubEventType
+    public function findOneByLabel(string $label): GithubEventTypeInterface
     {
-        return $this->entityManager->getRepository(GithubEventType::class)
+        return $this->entityManager->getRepository(GitHubEventType::class)
             ->findOneBy(
                 [
                     'label' => $label

@@ -1,5 +1,16 @@
 # DDD-hexagonal-application-example
 
+## Best practices
+
+### Doctrine migrations
+* always use IDEMPOTENCE : see \DoctrineMigrations\Version20230607063630
+* do not add migration class manually : use `diff` or `generate` command
+* after a `migrate` always do a `diff` to see if changes exists and fix them
+
+### DDD and Hexagonal choices for modelling
+* The `src/Domain/Model and Repository ` contains only Interface and the `src/Infrastructure/Doctrine/Entity and Repository` 
+contains the concrete classes and persisted entity : to separate Domain and Infrastructure
+
 ## Description
 
 This project is an example of hexagonal architecture with an DDD (Domain Driven Design) application on a use case. 

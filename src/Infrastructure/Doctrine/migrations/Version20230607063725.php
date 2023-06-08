@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20211027174300 extends AbstractMigration
+final class Version20230607063725 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -19,14 +19,14 @@ final class Version20211027174300 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql("INSERT INTO event_type (id, label) values (1, 'CommitCommentEvent')");
-        $this->addSql("INSERT INTO event_type (id, label) values (2, 'PullRequestReviewCommentEvent')");
+        $this->addSql("INSERT INTO github_event_type (label) values ('CommitCommentEvent')");
+        $this->addSql("INSERT INTO github_event_type (label) values ('PullRequestReviewCommentEvent')");
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql("DELETE FROM event_type WHERE label = 'CommitCommentEvent'");
-        $this->addSql("DELETE FROM event_type WHERE label = 'PullRequestReviewCommentEvent'");
+        $this->addSql("DELETE FROM github_event_type WHERE label = 'CommitCommentEvent'");
+        $this->addSql("DELETE FROM github_event_type WHERE label = 'PullRequestReviewCommentEvent'");
     }
 }

@@ -4,14 +4,31 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Doctrine\Entity;
 
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Domain\Model\GithubEventInterface;
 use App\Domain\Model\GithubEventTypeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 //performance : we mark this entity as readOnly and not considered for change-tracking
 // (https://www.doctrine-project.org/projects/doctrine-orm/en/2.15/reference/improving-performance.html#read-only-entities)
 #[ORM\Entity(readOnly: true)]
 #[ORM\Table(name: 'github_event')]
+#[Get(
+    normalizationContext: [
+        'groups' => [
+            'get',
+        ],
+    ]
+)]
+#[GetCollection(
+    normalizationContext: [
+        'groups' => [
+            'get',
+        ],
+    ]
+)]
 class GitHubEvent implements GithubEventInterface
 {
     #[ORM\Id]
@@ -25,18 +42,23 @@ class GitHubEvent implements GithubEventInterface
     private GithubEventTypeInterface $githubEventType;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(['get'])]
     private ?string $body = null;
 
     #[ORM\Column(type: 'text')]
+    #[Groups(['get'])]
     private string $repos;
 
     #[ORM\Column]
+    #[Groups(['get'])]
     private string $uuid;
 
     #[ORM\Column]
+    #[Groups(['get'])]
     private \DateTime $eventDate;
 
     #[ORM\Column]
+    #[Groups(['get'])]
     private int $eventHour;
 
     public function getId(): int

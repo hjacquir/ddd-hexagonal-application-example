@@ -55,7 +55,7 @@ start:
 	@$(call log,Starting the docker stack ...)
 	@$(DOCKER_COMPOSE) up -d
 	$(MAKE) db
-	@$(call log,View the API documentation at : http://127.0.0.1:8000/api/doc)
+	@$(call log,View the API documentation at : http://127.0.0.1:8000/api/docs)
 	@$(call log_success,Done)
 
 restart: var/docker.up ## Start the docker stack

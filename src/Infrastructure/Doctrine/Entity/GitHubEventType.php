@@ -4,12 +4,29 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Doctrine\Entity;
 
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Domain\EventType;
 use App\Domain\Model\GithubEventTypeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity]
 #[ORM\Table(name: self::TABLE_NAME)]
+#[Get(
+    normalizationContext: [
+        'groups' => [
+            'get',
+        ],
+    ]
+)]
+#[GetCollection(
+    normalizationContext: [
+        'groups' => [
+            'get',
+        ],
+    ]
+)]
 class GitHubEventType implements GithubEventTypeInterface
 {
     public const TABLE_NAME = 'github_event_type';
@@ -17,9 +34,11 @@ class GitHubEventType implements GithubEventTypeInterface
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column]
+    #[Groups(['get'])]
     private int $id;
 
     #[ORM\Column(unique: true)]
+    #[Groups(['get'])]
     private string $label;
 
     private EventType $eventType;

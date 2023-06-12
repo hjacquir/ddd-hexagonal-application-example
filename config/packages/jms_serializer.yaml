@@ -1,6 +1,0 @@
-jms_serializer:
-  metadata:
-    directories:
-      App:
-        namespace_prefix: "App\\Domain\\Model"
-        path: "%kernel.project_dir%/src/Application/Serializer/mapping"

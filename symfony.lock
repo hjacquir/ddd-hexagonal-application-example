@@ -1,18 +1,20 @@
 {
-    "composer/package-versions-deprecated": {
-        "version": "1.11.99.1"
-    },
-    "doctrine/annotations": {
-        "version": "1.0",
+    "api-platform/core": {
+        "version": "2.7",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "a2759dd6123694c8d901d0ec80006e044c2e6457"
+            "branch": "main",
+            "version": "2.5",
+            "ref": "05b57782a78c21a664a42055dc11cf1954ca36bb"
         },
         "files": [
-            "config/routes/annotations.yaml"
+            "config/packages/api_platform.yaml",
+            "config/routes/api_platform.yaml",
+            "src/Entity/.gitignore"
         ]
+    },
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99.1"
     },
     "doctrine/cache": {
         "version": "1.10.2"
@@ -87,15 +89,6 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },
-    "friendsofsymfony/rest-bundle": {
-        "version": "3.1",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "2.2",
-            "ref": "fa845143b7e0a4c70aedd1a88c549e6d977e9ae5"
-        }
-    },
     "guzzlehttp/guzzle": {
         "version": "7.3.0"
     },
@@ -107,21 +100,6 @@
     },
     "halaxa/json-machine": {
         "version": "0.7.0"
-    },
-    "jms/metadata": {
-        "version": "2.6.1"
-    },
-    "jms/serializer": {
-        "version": "3.17.1"
-    },
-    "jms/serializer-bundle": {
-        "version": "4.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "3.0",
-            "ref": "384cec52df45f3bfd46a09930d6960a58872b268"
-        }
     },
     "laminas/laminas-code": {
         "version": "4.0.0"
@@ -138,17 +116,16 @@
     "monolog/monolog": {
         "version": "2.3.4"
     },
-    "nelmio/api-doc-bundle": {
-        "version": "4.8",
+    "nelmio/cors-bundle": {
+        "version": "2.3",
         "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "3.0",
-            "ref": "c8e0c38e1a280ab9e37587a8fa32b251d5bc1c94"
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.5",
+            "ref": "6bea22e6c564fba3a1391615cada1437d0bde39c"
         },
         "files": [
-            "config/packages/nelmio_api_doc.yaml",
-            "config/routes/nelmio_api_doc.yaml"
+            "config/packages/nelmio_cors.yaml"
         ]
     },
     "pear/archive_tar": {
@@ -195,18 +172,6 @@
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
-    },
-    "sensio/framework-extra-bundle": {
-        "version": "6.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "5.2",
-            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
-        },
-        "files": [
-            "config/packages/sensio_framework_extra.yaml"
-        ]
     },
     "symfony/amqp-messenger": {
         "version": "v5.1.11"
@@ -349,9 +314,6 @@
             "config/packages/prod/monolog.yaml",
             "config/packages/test/monolog.yaml"
         ]
-    },
-    "symfony/options-resolver": {
-        "version": "v5.4.0"
     },
     "symfony/orm-pack": {
         "version": "v2.1.0"
@@ -515,25 +477,7 @@
     "webmozart/assert": {
         "version": "1.10.0"
     },
-    "willdurand/hateoas": {
-        "version": "3.8.0"
-    },
-    "willdurand/hateoas-bundle": {
-        "version": "2.4",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "2.0",
-            "ref": "34df072c6edaa61ae19afb2f3a239f272fecab87"
-        }
-    },
-    "willdurand/jsonp-callback-validator": {
-        "version": "v1.1.0"
-    },
     "willdurand/negotiation": {
         "version": "3.0.0"
-    },
-    "zircote/swagger-php": {
-        "version": "4.2.1"
     }
 }

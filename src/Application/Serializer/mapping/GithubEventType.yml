@@ -1,8 +1,0 @@
-App\Domain\Model\GithubEventType:
-  exclusion_policy: ALL
-  properties:
-    id:
-      expose: true
-    label:
-      expose: true
-

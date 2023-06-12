@@ -8,7 +8,9 @@ use App\Domain\Model\GithubEventInterface;
 use App\Domain\Model\GithubEventTypeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
+//performance : we mark this entity as readOnly and not considered for change-tracking
+// (https://www.doctrine-project.org/projects/doctrine-orm/en/2.15/reference/improving-performance.html#read-only-entities)
+#[ORM\Entity(readOnly: true)]
 #[ORM\Table(name: 'github_event')]
 class GitHubEvent implements GithubEventInterface
 {
@@ -16,8 +18,9 @@ class GitHubEvent implements GithubEventInterface
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column]
     private int $id;
-
-    #[ORM\ManyToOne(targetEntity: GitHubEventType::class)]
+    // performance : we use EXTRA_LAZY to fetch associations
+    // (https://www.doctrine-project.org/projects/doctrine-orm/en/2.15/reference/improving-performance.html#extra-lazy-collections)
+    #[ORM\ManyToOne(targetEntity: GitHubEventType::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(name: 'github_event_type_id', referencedColumnName: 'id')]
     private GithubEventTypeInterface $githubEventType;
 

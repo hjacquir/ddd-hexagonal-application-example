@@ -11,9 +11,7 @@ use App\Domain\Model\GithubEventTypeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-//performance : we mark this entity as readOnly and not considered for change-tracking
-// (https://www.doctrine-project.org/projects/doctrine-orm/en/2.15/reference/improving-performance.html#read-only-entities)
-#[ORM\Entity(readOnly: true)]
+#[ORM\Entity]
 #[ORM\Table(name: 'github_event')]
 #[Get(
     normalizationContext: [
